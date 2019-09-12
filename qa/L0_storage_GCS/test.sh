@@ -42,7 +42,7 @@ INFER_TEST=infer_test.py
 
 # Google cloud variables (Point to bucket when testing cloud storage)
 
-BUCKET_URL="gs://bucket"
+BUCKET_URL="gs://trtis-ci-data"
 
 # Remove Slash in BUCKET_URL
 BUCKET_URL=${BUCKET_URL%/}
@@ -103,7 +103,7 @@ for MAYBE_SLASH in "" "/"; do
     kill $SERVER_PID
     wait $SERVER_PID
 
-    gsutil -m rm "${BUCKET_URL_SLASH}**"
+    #gsutil -m rm "${BUCKET_URL_SLASH}**"
     rm models/dummy
 
     # Now start model tests
