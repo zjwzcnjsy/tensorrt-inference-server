@@ -58,7 +58,7 @@ RUN cd pytorch && \
     pip install --no-cache-dir -v .
 
 ############################################################################
-## Onnx Runtime stage: Build Onnx Runtime on CUDA 10, CUDNN 7
+## Onnx Runtime stage: Build Onnx Runtime
 ############################################################################
 FROM ${BASE_IMAGE} AS trtserver_onnx
 
@@ -129,8 +129,6 @@ RUN python3 /workspace/onnxruntime/tools/ci_build/build.py --build_dir /workspac
             --use_cuda \
             --cuda_home /usr/local/cuda \
             --cudnn_home /usr/local/cudnn-$(echo $CUDNN_VERSION | cut -d. -f1-2)/cuda \
-            --use_tensorrt \
-            --tensorrt_home /usr/src/tensorrt \
             --use_openvino CPU_FP32 \
             --update \
             --build
@@ -294,7 +292,7 @@ RUN LIBCUDA_FOUND=$(ldconfig -p | grep -v compat | awk '{print $1}' | grep libcu
                   -DTRTIS_ENABLE_TENSORRT=ON \
                   -DTRTIS_ENABLE_CAFFE2=ON \
                   -DTRTIS_ENABLE_ONNXRUNTIME=ON \
-                  -DTRTIS_ENABLE_ONNXRUNTIME_TENSORRT=ON \
+                  -DTRTIS_ENABLE_ONNXRUNTIME_TENSORRT=OFF \
                   -DTRTIS_ENABLE_ONNXRUNTIME_OPENVINO=ON \
                   -DTRTIS_ENABLE_PYTORCH=ON \
                   -DTRTIS_ENABLE_GRPC_V2=ON \
