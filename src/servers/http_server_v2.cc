@@ -580,8 +580,7 @@ ReadDataFromJson(
     }
   }
 
-  *byte_size =
-      element_cnt * GetDataTypeByteSize(DataTypeToProtocolString(dtype));
+  *byte_size = element_cnt * GetDataTypeByteSize(dtype);
 
   return nullptr;
 }
